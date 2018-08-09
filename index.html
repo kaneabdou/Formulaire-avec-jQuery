@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Accueil</title>
+	<style type="text/css">
+		body{
+			background-color: #130f40;
+			color: #ecf0f1;
+			margin-left: 30%;
+            
+		}
+		h1{
+		  
+		  font-size: 2.7em;
+		}
+		img{
+			width: 2%;
+			height: 2%;
+		}
+	</style>
+</head>
+<body>
+	<h1>Formulaire d'inscription</h1>
+	<form>
+   <table>
+			<tr><td><label for="nom">Nom:</label></td><td><input type="text" name="nom" id="nom"></td><td><img id="invalideNom" src=""></td></tr>
+			<tr><td><label for="prenom">Prenom:</label></td><td><input type="text" name="prenom" id="prenom"></td><td><img id="invalidePrenom" src=""></span></td></tr>
+		<tr><td><label for="pseudo">Courriel:</label></td><td><input type="text" name="pseudo" id="pseudo" placeholder="utilisateur@domaine.fr"></td><td><span id="aideCourriel"></span></td></tr>
+			
+			<tr><td><label for="mdp">Mot de passe:</label></td><td><input type="password" name="mdp" id="mdp"></span></td><td><span id="aideMdp"></td></tr>
+			<tr><td><input type="checkbox" name="conf" id="conf"><label for="conf">M'envoyer un courriel de confirmation</label></td></tr>
+			<tr></tr>
+			<tr></tr>
+			<tr><td><input type="radio" name="abn" id="abn1"><label for="abn1">M'abonner a la newsletter et aux promotions</label></td></tr>
+			<tr><td><input type="radio" name="abn" id="abn2"><label for="abn2">M'abonner uniquement a la newsletter </label></td></tr>
+			<tr><td><input type="radio" name="abn" id="abn3" checked="true"><label for="abn3">Ne pas m'abonner</label></td></tr>
+			<tr><td>
+				<select name="nationalite" id="nationalite">
+							<option value="0"></option>
+							<option value="angleterre">Angleterre</option>
+							<option value="allemagne">Allemagne</option>
+						    <option value="belgique">Belgique</option>
+							<option value="burkina">Burkina Faso</option>
+							<option value="colombie">Colombie</option>
+							<option value="canada">Canada</option>
+							<option value="danemark">Danemark</option>
+							<option value="espagne">Espagne</option>
+							<option value="emirat">Emirat Arabe unis</option>
+							<option value="france">France</option>
+							<option value="finlande">Finlande</option>
+							<option value="gambie"> Gambie</option>
+							<option value="islande">Islande</option>
+							<option value="irlande">Irlande</option>
+							<option value="mauritanie">Mauritanie</option>
+							<option value="mali">Mali</option>
+							<option value="namibie">Namibie</option>
+							<option value="oman">Oman</option>
+							<option value="republique">Republique Tcheque</option>
+							<option value="serbie">Serbie</option>
+							<option value="senegal">Senegal</option>
+							<option value="turquie">Turquie</option>
+							<option value="tunisie">Tunisie</option>
+							<option value="zambie">Zambie</option></select><label for="nationalite">Nationalite</label></td></tr><tr></tr><br><br>
+			<tr><td></td><td></td><td><input type="submit" name="send" value="Envoyer"><input type="reset" name="annule" value="Annuler"></td></tr>
+			
+		</table></form>
+
+	</form>
+   <script src="jquery.js"></script>
+ <script type="text/javascript"></script>
+<script>
+		$(function() {
+   		
+   	    var lefocus,explication;
+   	    $('input').focus(function(e){
+              lefocus='#'+ $(this).attr('id');
+              
+              $(lefocus).css("background-color","#afc");
+             if(lefocus=="#nom"){
+             $(lefocus).attr('placeholder','votre nom svp...');
+             	
+             }else if(lefocus=="#prenom"){
+             	$(lefocus).attr('placeholder','votre prenom svp...');
+             }
+   	    });
+   	    $('input').blur(function(e){
+   	    	lefocus='#'+ $(this).attr('id');
+              $(lefocus).css("background-color","#fff");
+              
+             if(lefocus=="#nom"){
+             	 var longueur=e.target.value;
+             	if (longueur.length<1) {
+             		$(invalideNom).attr('src','a.png');
+             	}else
+                   $(invalideNom).attr('src','c.png');
+             	
+             }else if(lefocus=="#prenom"){
+              var longueur=e.target.value,
+              couleur;
+             	if (longueur.length<1) {
+             		$(invalidePrenom).attr('src','a.png');
+             	}else
+                   $(invalidePrenom).attr('src','c.png');
+             }else if (lefocus=="#pseudo") {
+                 var regexCourriel=/.+@.+\..+/,
+                 email=e.target.value;
+                 if (!regexCourriel.test(email)) {
+                 	$('#aideCourriel').text("mauvais");
+                 	$('#aideCourriel').css('color','#FF0000');
+                 }else
+                 $('#aideCourriel').text("Bon").css('color','#79F8F8');
+                 	
+                 
+             } 
+
+   	    });
+          
+
+   	    });
+   	
+</script>
+<script type="text/javascript">
+	
+	document.getElementById("mdp").addEventListener("input",function(e){
+
+                var textEntrer=e.target.value,
+                message="inssufisant",
+                couleur="red";
+                 if (textEntrer.length>=8) {
+                      message="Valide";
+                      couleur="green";
+                 }else if (textEntrer.length>=4) {
+                 	message="moyenne";
+                 	couleur="yellow";
+                 }
+                  document.getElementById("aideMdp").textContent=message;
+                   document.getElementById("aideMdp").style.color=couleur;
+
+             });
+</script>
+</body>
+</html>
